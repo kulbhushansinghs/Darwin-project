@@ -1,5 +1,7 @@
+# Kullu and Piaopaio working code
+
 rm(list=ls())
-setwd("/home/kullu/Desktop/Link to Kullu_desktop/Git/Darwin")
+setwd("/home/kullu/Desktop/Link to Kullu_desktop/Git/Darwin-project/Data")
 d=read.csv("Darwin sample data.csv")
 #Libraries
 library(Hmisc)

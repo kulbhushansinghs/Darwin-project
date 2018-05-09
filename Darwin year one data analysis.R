@@ -1,6 +1,6 @@
 
 #### Setting working directory
-setwd("/home/kullu/Desktop/Link to Kullu_desktop/Git/Darwin-project/Data")
+setwd("/Users/Kullu/Dropbox (Snow Leopard Trust)/Kullu_desktop/Git/Darwin-project/Data")
 
 #### Reading data
 dat<-read.csv("Year1data.csv")

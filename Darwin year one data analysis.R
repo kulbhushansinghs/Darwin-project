@@ -26,8 +26,9 @@ dat$Gender[which(dat$Gender == "Fimale")] <- "Female"
 dat$Gender[which(dat$Gender == "male")] <- "Male"
 
 table(dat$Education) ## This is too complex to correct using code. I will do this mannually in the datasheet
-
-colnames(dat)[7] <- "Number.of.schemes"
+table(dat$Education_ordered)
+table(dat$Gender, dat$Education_ordered)
+colnames(dat)[8] <- "Number.of.schemes"
 table(dat$Number.of.schemes)
 
 table(dat$Vaccination)
@@ -102,41 +103,50 @@ hist(dat$Total_Brown.bear)
 
 ##################################################################
 ########## Analysis of the attitude data by country
-
+par(mfrow = c(2,3))
+par(mar = c(0,3,3,0))
 boxplot(dat$Total_Snow.leopard[which(dat$Country == "Mongolia")],
         dat$Total_Snow.leopard[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Snow.leopard[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Snow leopard")
+        #names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
+        main = "Snow leopard", ylim = c(0,40), col = c("white", "grey", "dark grey"))
 
 boxplot(dat$Total_Wolf[which(dat$Country == "Mongolia")],
         dat$Total_Wolf[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Wolf[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Wolf")
+        #names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
+        main = "Wolf", ylim = c(0,40), col = c("white", "light grey", "dark grey"))
 
 boxplot(dat$Total_Lynx[which(dat$Country == "Mongolia")],
         dat$Total_Lynx[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Lynx[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Lynx")
+        #names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
+        main = "Lynx", ylim = c(0,40), col = c("white", "grey", "dark grey"))
 
+par(mar = c(4, 3, 2, 0))
 boxplot(dat$Total_Brown.bear[which(dat$Country == "Mongolia")],
         dat$Total_Brown.bear[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Brown.bear[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Brown bear")
+        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
+        main = "Brown bear", ylim = c(0,40), col = c("white", "grey", "dark grey"))
 
 boxplot(dat$Total_Ibex[which(dat$Country == "Mongolia")],
         dat$Total_Ibex[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Ibex[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Ibex")
+        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
+        main = "Ibex", ylim = c(0,40), col = c("white", "grey", "dark grey"))
 
 boxplot(dat$Total_Argali[which(dat$Country == "Mongolia")],
         dat$Total_Argali[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Argali[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Argali")
+        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
+        main = "Argali", ylim = c(0,40), col = c("white", "grey", "dark grey"))
 
+par(mar = c(3,3,3,0))
 boxplot(dat$Total_Markhor[which(dat$Country == "Mongolia")],
         dat$Total_Markhor[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Markhor[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Markhor")
+        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Markhor", ylim = c(0,40))
 
 hist(dat$Total_Snow.leopard[which(dat$Country == "Kyrgyzstan")], main = "Snow leopard")
 
@@ -160,7 +170,8 @@ boxplot(dat$Total_Snow.leopard[which(dat$Country == "Mongolia" &
 
 #####################################################################
 ##### Analysis by Gender
-
+par(mfrow = c(2,3))
+par(mar = c(1,3,3,0.3))
 boxplot(dat$Total_Snow.leopard[which(dat$Country == "Mongolia" & 
                                        dat$Gender == "Female")],
         dat$Total_Snow.leopard[which(dat$Country == "Mongolia" & 
@@ -173,8 +184,9 @@ boxplot(dat$Total_Snow.leopard[which(dat$Country == "Mongolia" &
                                        dat$Gender == "Female")],
         dat$Total_Snow.leopard[which(dat$Country == "Pakistan" & 
                                        dat$Gender == "Male")],
-        names= c("Mongolia_Female", "Mongolia_Male", "Kyrgyzstan _Female", "Kyrgyzstan_male",
-                 "Pakistan_Female", "Pakistan_Male"), main = "Snow leopard")
+        #names= c("Mongolia\nFemale", "Mongolia\nMale", "Kyrgyzstan\nFemale", "Kyrgyzstan\nmale",
+        #         "Pakistan\nFemale", "Pakistan\nMale"), 
+        main = "Snow leopard", las = 2, col = c("white", "grey"))
 
 boxplot(dat$Total_Wolf[which(dat$Country == "Mongolia" & 
                                        dat$Gender == "Female")],
@@ -188,8 +200,9 @@ boxplot(dat$Total_Wolf[which(dat$Country == "Mongolia" &
                                        dat$Gender == "Female")],
         dat$Total_Wolf[which(dat$Country == "Pakistan" & 
                                        dat$Gender == "Male")],
-        names= c("Mongolia_Female", "Mongolia_Male", "Kyrgyzstan _Female", "Kyrgyzstan_male",
-                 "Pakistan_Female", "Pakistan_Male"), main = "Wolf")
+        #names= c("Mongolia\nFemale", "Mongolia\nMale", "Kyrgyzstan\nFemale", "Kyrgyzstan\nmale",
+        #         "Pakistan\nFemale", "Pakistan\nMale"), 
+        main = "Wolf", las = 2, col = c("white", "grey"))
 
 boxplot(dat$Total_Lynx[which(dat$Country == "Mongolia" & 
                                dat$Gender == "Female")],
@@ -203,9 +216,10 @@ boxplot(dat$Total_Lynx[which(dat$Country == "Mongolia" &
                                dat$Gender == "Female")],
         dat$Total_Lynx[which(dat$Country == "Pakistan" & 
                                dat$Gender == "Male")],
-        names= c("Mongolia_Female", "Mongolia_Male", "Kyrgyzstan _Female", "Kyrgyzstan_male",
-                 "Pakistan_Female", "Pakistan_Male"), main = "Lynx")
-
+        #names= c("Mongolia\nFemale", "Mongolia\nMale", "Kyrgyzstan\nFemale", "Kyrgyzstan\nmale",
+        #         "Pakistan\nFemale", "Pakistan\nMale"), 
+        main = "Lynx", las = 2, col = c("white", "grey"))
+par(mar = c(6,3,2,0))
 boxplot(dat$Total_Brown.bear[which(dat$Country == "Mongolia" & 
                                dat$Gender == "Female")],
         dat$Total_Brown.bear[which(dat$Country == "Mongolia" & 
@@ -218,8 +232,9 @@ boxplot(dat$Total_Brown.bear[which(dat$Country == "Mongolia" &
                                dat$Gender == "Female")],
         dat$Total_Brown.bear[which(dat$Country == "Pakistan" & 
                                dat$Gender == "Male")],
-        names= c("Mongolia_Female", "Mongolia_Male", "Kyrgyzstan _Female", "Kyrgyzstan_male",
-                 "Pakistan_Female", "Pakistan_Male"), main = "Brown.bear")
+        names= c("Mongolia\nFemale", "Mongolia\nMale", "Kyrgyzstan\nFemale", "Kyrgyzstan\nmale",
+                 "Pakistan\nFemale", "Pakistan\nMale"), 
+        main = "Brown bear", las = 2, col = c("white", "grey"))
 
 boxplot(dat$Total_Ibex[which(dat$Country == "Mongolia" & 
                                      dat$Gender == "Female")],
@@ -233,8 +248,8 @@ boxplot(dat$Total_Ibex[which(dat$Country == "Mongolia" &
                                      dat$Gender == "Female")],
         dat$Total_Ibex[which(dat$Country == "Pakistan" & 
                                      dat$Gender == "Male")],
-        names= c("Mongolia_Female", "Mongolia_Male", "Kyrgyzstan _Female", "Kyrgyzstan_male",
-                 "Pakistan_Female", "Pakistan_Male"), main = "Ibex")
+        names= c("Mongolia\nFemale", "Mongolia\nMale", "Kyrgyzstan\nFemale", "Kyrgyzstan\nmale",
+                 "Pakistan\nFemale", "Pakistan\nMale"), main = "Ibex", las = 2, col = c("white", "grey"))
 
 boxplot(dat$Total_Argali[which(dat$Country == "Mongolia" & 
                                dat$Gender == "Female")],
@@ -248,8 +263,8 @@ boxplot(dat$Total_Argali[which(dat$Country == "Mongolia" &
                                dat$Gender == "Female")],
         dat$Total_Argali[which(dat$Country == "Pakistan" & 
                                dat$Gender == "Male")],
-        names= c("Mongolia_Female", "Mongolia_Male", "Kyrgyzstan _Female", "Kyrgyzstan_male",
-                 "Pakistan_Female", "Pakistan_Male"), main = "Argali")
+        names= c("Mongolia\nFemale", "Mongolia\nMale", "Kyrgyzstan\nFemale", "Kyrgyzstan\nmale",
+                 "Pakistan\nFemale", "Pakistan\nMale"), main = "Argali", las =2, col = c("white", "grey"))
 
 boxplot(dat$Total_Blue.sheep[which(dat$Country == "Mongolia" & 
                                  dat$Gender == "Female")],
@@ -263,8 +278,8 @@ boxplot(dat$Total_Blue.sheep[which(dat$Country == "Mongolia" &
                                  dat$Gender == "Female")],
         dat$Total_Blue.sheep[which(dat$Country == "Pakistan" & 
                                  dat$Gender == "Male")],
-        names= c("Mongolia_Female", "Mongolia_Male", "Kyrgyzstan _Female", "Kyrgyzstan_male",
-                 "Pakistan_Female", "Pakistan_Male"), main = "Blue sheep")
+        names= c("Mongolia\nFemale", "Mongolia\nMale", "Kyrgyzstan\nFemale", "Kyrgyzstan\nmale",
+                 "Pakistan\nFemale", "Pakistan\nMale"), main = "Blue sheep", las = 2)
 
 boxplot(dat$Total_Markhor[which(dat$Country == "Mongolia" & 
                                      dat$Gender == "Female")],
@@ -323,6 +338,7 @@ boxplot(dat$Age[which(dat$Gender == "Female")],
 plot(dat$Total_Snow.leopard ~ dat$Age, xlab = "Age", ylab = "Attitude SL", 
      cex = 1, pch = 20, col = c(ifelse(dat$Gender == "Female", 1, 2)))
 
+
 mod1 <- lm(dat$Total_Snow.leopard ~ dat$Age)
 summary(mod1)
 abline(mod1)
@@ -334,16 +350,74 @@ mod2 <- lm(dat$Total_Wolf ~ dat$Age)
 summary(mod2)
 abline(mod2)
 
+#### Analysis by education
+
+hist(dat$Education_ordered)
+
+## Attitudes to snow leopard by education
+par(mfrow = c(2,3))
+par(mar = c(1,3,3,0.3))
+
+boxplot(dat$Total_Snow.leopard[which(dat$Education_ordered == 0)],
+        dat$Total_Snow.leopard[which(dat$Education_ordered == 1)],
+        dat$Total_Snow.leopard[which(dat$Education_ordered == 2)],
+        dat$Total_Snow.leopard[which(dat$Education_ordered == 3)], 
+        col = grey.colors(4,), main = "Snow leopard",
+        names = c("None", "Primary", "Secondary", "Higher"))
+
+boxplot(dat$Total_Wolf[which(dat$Education_ordered == 0)],
+        dat$Total_Wolf[which(dat$Education_ordered == 1)],
+        dat$Total_Wolf[which(dat$Education_ordered == 2)],
+        dat$Total_Wolf[which(dat$Education_ordered == 3)], 
+        col = grey.colors(4,), main = "Wolf",
+        names = c("None", "Primary", "Secondary", "Higher"))
+
+boxplot(dat$Total_Lynx[which(dat$Education_ordered == 0)],
+        dat$Total_Lynx[which(dat$Education_ordered == 1)],
+        dat$Total_Lynx[which(dat$Education_ordered == 2)],
+        dat$Total_Lynx[which(dat$Education_ordered == 3)], 
+        col = grey.colors(4,), main = "Lynx",
+        names = c("None", "Primary", "Secondary", "Higher"))
+
+boxplot(dat$Total_Brown.bear[which(dat$Education_ordered == 0)],
+        dat$Total_Brown.bear[which(dat$Education_ordered == 1)],
+        dat$Total_Brown.bear[which(dat$Education_ordered == 2)],
+        dat$Total_Brown.bear[which(dat$Education_ordered == 3)], 
+        col = grey.colors(4,), main = "Brown.bear",
+        names = c("None", "Primary", "Secondary", "Higher"))
+
+boxplot(dat$Total_Ibex[which(dat$Education_ordered == 0)],
+        dat$Total_Ibex[which(dat$Education_ordered == 1)],
+        dat$Total_Ibex[which(dat$Education_ordered == 2)],
+        dat$Total_Ibex[which(dat$Education_ordered == 3)], 
+        col = grey.colors(4,), main = "Ibex",
+        names = c("None", "Primary", "Secondary", "Higher"))
+
+boxplot(dat$Total_Argali[which(dat$Education_ordered == 0)],
+        dat$Total_Argali[which(dat$Education_ordered == 1)],
+        dat$Total_Argali[which(dat$Education_ordered == 2)],
+        dat$Total_Argali[which(dat$Education_ordered == 3)], 
+        col = grey.colors(4,), main = "Argali",
+        names = c("None", "Primary", "Secondary", "Higher"))
+
+##### LMER analsis
 library(lme4)
-mod3 <- lmer(Total_Snow.leopard ~ Age + Gender + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
+mod3 <- lmer(Total_Snow.leopard ~ Age + Education_ordered + Gender + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod3)
-mod4 <- lmer(Total_Wolf ~ Age + Gender + (1|Country/Community), dat)
+mod4 <- lmer(Total_Wolf ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod4)
-mod5 <- lmer(Total_Lynx ~ Age + Gender + (1|Community), dat)
+mod5 <- lmer(Total_Lynx ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Community), dat)
 summary(mod5)
-mod6 <- lmer(Total_Brown.bear ~ Age + Gender + (1|Community), dat)
+mod6 <- lmer(Total_Brown.bear ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Community), dat)
 summary(mod6)
-mod7 <- lmer(Total_Ibex ~ Age + Gender + (1|Country/Community), dat)
+mod7 <- lmer(Total_Ibex ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod7)
-mod8 <- lmer(Total_Argali ~ Age + Gender + (1|Country/Community), dat)
+mod8 <- lmer(Total_Argali ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod8)
+
+######## GLM analysis
+mod9 <- glm(Total_Snow.leopard ~ Gender + Country , data = dat)
+summary(mod9)
+
+mod10 <- glm(Total_Wolf ~  Gender + Country, data = dat)
+summary(mod10)

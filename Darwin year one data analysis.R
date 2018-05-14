@@ -100,16 +100,20 @@ hist(dat$Total_Lynx)
 table(dat$Total_Brown.bear)
 hist(dat$Total_Brown.bear)
 
-
+dat<-subset(dat, select = c(Country, Community, Age, Gender, Education_ordered, Small_loss, 
+                            Large_loss, Small_have, Large_have, Total_Snow.leopard, Total_Wolf, 
+                            Total_Lynx, Total_Ibex, Total_Brown.bear, Total_Argali))
+dat<-dat[complete.cases(dat[,3:5]),]
 ##################################################################
 ########## Analysis of the attitude data by country
 par(mfrow = c(2,3))
-par(mar = c(0,3,3,0))
+par(mar = c(2,5,3,1))
 boxplot(dat$Total_Snow.leopard[which(dat$Country == "Mongolia")],
         dat$Total_Snow.leopard[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Snow.leopard[which(dat$Country == "Pakistan")], 
         #names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
-        main = "Snow leopard", ylim = c(0,40), col = c("white", "grey", "dark grey"))
+        main = "Snow leopard", ylab = "Attitude score",
+        ylim = c(0,40), col = c("white", "grey", "dark grey"))
 
 boxplot(dat$Total_Wolf[which(dat$Country == "Mongolia")],
         dat$Total_Wolf[which(dat$Country == "Kyrgyzstan")],
@@ -123,24 +127,24 @@ boxplot(dat$Total_Lynx[which(dat$Country == "Mongolia")],
         #names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
         main = "Lynx", ylim = c(0,40), col = c("white", "grey", "dark grey"))
 
-par(mar = c(4, 3, 2, 0))
+par(mar = c(6, 5, 2, 1))
 boxplot(dat$Total_Brown.bear[which(dat$Country == "Mongolia")],
         dat$Total_Brown.bear[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Brown.bear[which(dat$Country == "Pakistan")], 
-        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
-        main = "Brown bear", ylim = c(0,40), col = c("white", "grey", "dark grey"))
+        names= c("Mongolia", "Kyrgyzstan", "Pakistan"), ylab = "Attitude score",
+        main = "Brown bear", ylim = c(0,40), col = c("white", "grey", "dark grey"), las = 2)
 
 boxplot(dat$Total_Ibex[which(dat$Country == "Mongolia")],
         dat$Total_Ibex[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Ibex[which(dat$Country == "Pakistan")], 
         names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
-        main = "Ibex", ylim = c(0,40), col = c("white", "grey", "dark grey"))
+        main = "Ibex", ylim = c(0,40), col = c("white", "grey", "dark grey"), las = 2)
 
 boxplot(dat$Total_Argali[which(dat$Country == "Mongolia")],
         dat$Total_Argali[which(dat$Country == "Kyrgyzstan")],
         dat$Total_Argali[which(dat$Country == "Pakistan")], 
         names= c("Mongolia", "Kyrgyzstan", "Pakistan"), 
-        main = "Argali", ylim = c(0,40), col = c("white", "grey", "dark grey"))
+        main = "Argali", ylim = c(0,40), col = c("white", "grey", "dark grey"), las = 2)
 
 par(mar = c(3,3,3,0))
 boxplot(dat$Total_Markhor[which(dat$Country == "Mongolia")],
@@ -356,67 +360,205 @@ hist(dat$Education_ordered)
 
 ## Attitudes to snow leopard by education
 par(mfrow = c(2,3))
-par(mar = c(1,3,3,0.3))
+par(mar = c(1,5,3,0.3))
 
 boxplot(dat$Total_Snow.leopard[which(dat$Education_ordered == 0)],
         dat$Total_Snow.leopard[which(dat$Education_ordered == 1)],
         dat$Total_Snow.leopard[which(dat$Education_ordered == 2)],
         dat$Total_Snow.leopard[which(dat$Education_ordered == 3)], 
-        col = grey.colors(4,), main = "Snow leopard",
-        names = c("None", "Primary", "Secondary", "Higher"))
-
+        col = grey.colors(4), main = "Snow leopard", ylab = "Attitude score")
+par(mar = c(1,3,3,0.3))
 boxplot(dat$Total_Wolf[which(dat$Education_ordered == 0)],
         dat$Total_Wolf[which(dat$Education_ordered == 1)],
         dat$Total_Wolf[which(dat$Education_ordered == 2)],
         dat$Total_Wolf[which(dat$Education_ordered == 3)], 
-        col = grey.colors(4,), main = "Wolf",
-        names = c("None", "Primary", "Secondary", "Higher"))
+        col = grey.colors(4), main = "Wolf")
 
 boxplot(dat$Total_Lynx[which(dat$Education_ordered == 0)],
         dat$Total_Lynx[which(dat$Education_ordered == 1)],
         dat$Total_Lynx[which(dat$Education_ordered == 2)],
         dat$Total_Lynx[which(dat$Education_ordered == 3)], 
-        col = grey.colors(4,), main = "Lynx",
-        names = c("None", "Primary", "Secondary", "Higher"))
+        col = grey.colors(4), main = "Lynx")
 
+par(mar = c(5,5,3,0.3))
 boxplot(dat$Total_Brown.bear[which(dat$Education_ordered == 0)],
         dat$Total_Brown.bear[which(dat$Education_ordered == 1)],
         dat$Total_Brown.bear[which(dat$Education_ordered == 2)],
         dat$Total_Brown.bear[which(dat$Education_ordered == 3)], 
-        col = grey.colors(4,), main = "Brown.bear",
-        names = c("None", "Primary", "Secondary", "Higher"))
-
+        col = grey.colors(4), main = "Brown.bear", ylab = "Attitude score",
+        names = c("None", "Primary", "Secondary", "Higher"), las = 2)
+par(mar = c(5,3,3,0.3))
 boxplot(dat$Total_Ibex[which(dat$Education_ordered == 0)],
         dat$Total_Ibex[which(dat$Education_ordered == 1)],
         dat$Total_Ibex[which(dat$Education_ordered == 2)],
         dat$Total_Ibex[which(dat$Education_ordered == 3)], 
-        col = grey.colors(4,), main = "Ibex",
-        names = c("None", "Primary", "Secondary", "Higher"))
+        col = grey.colors(4), main = "Ibex",
+        names = c("None", "Primary", "Secondary", "Higher"), las =2 )
 
 boxplot(dat$Total_Argali[which(dat$Education_ordered == 0)],
         dat$Total_Argali[which(dat$Education_ordered == 1)],
         dat$Total_Argali[which(dat$Education_ordered == 2)],
         dat$Total_Argali[which(dat$Education_ordered == 3)], 
-        col = grey.colors(4,), main = "Argali",
-        names = c("None", "Primary", "Secondary", "Higher"))
+        col = grey.colors(4), main = "Argali",
+        names = c("None", "Primary", "Secondary", "Higher"), las = 2)
 
-##### LMER analsis
+##### LMER analsis with livestock data hence all Kyrgyzstan points are ignored
 library(lme4)
-mod3 <- lmer(Total_Snow.leopard ~ Age + Education_ordered + Gender + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
+mod3 <- lmer(Total_Snow.leopard ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod3)
+Sl.param <- summary(mod3)$coefficients[2:8,1]
+Sl.ci <- summary(mod3)$coefficients[2:8,2]
+
 mod4 <- lmer(Total_Wolf ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod4)
+Wolf.param <- summary(mod4)$coefficients[2:8,1]
+Wolf.ci <- summary(mod4)$coefficients[2:8,2]
+
 mod5 <- lmer(Total_Lynx ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Community), dat)
 summary(mod5)
+Lynx.param <- summary(mod5)$coefficients[2:8,1]
+Lynx.ci <- summary(mod5)$coefficients[2:8,2]
+
 mod6 <- lmer(Total_Brown.bear ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Community), dat)
 summary(mod6)
+B.bear.param <- summary(mod6)$coefficients[2:8,1]
+B.bear.ci <- summary(mod6)$coefficients[2:8,2]
+
 mod7 <- lmer(Total_Ibex ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod7)
+Ibex.param <- summary(mod7)$coefficients[2:8,1]
+Ibex.ci <- summary(mod7)$coefficients[2:8,2]
+
 mod8 <- lmer(Total_Argali ~ Age + Gender + Education_ordered + Small_loss + Large_loss + Small_have + Large_have + (1|Country/Community), dat)
 summary(mod8)
+Argali.param <- summary(mod8)$coefficients[2:8,1]
+Argali.ci <- summary(mod8)$coefficients[2:8,2]
+## plotting the modelling results
+library(Hmisc)
+par(mfrow = c(2,3))
+par(mar = c(2,4,3,0.3))
+plot(Sl.param, ylim = c(-2,3), ylab = "Parameter estimate", main = "Snow leopard", 
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 7.5))
+errbar(seq(1,7,1), Sl.param, Sl.param+(1.96 * Sl.ci), Sl.param - (1.96 * Sl.ci), add= T, lwd = 2, cex =2)
+abline(h = 0, lwd =2)
 
+par(mar = c(2,3,3,0.3))
+plot(seq(1,7,1), Wolf.param, ylim = c(-2,3), ylab = "Parameter estimate", main = "Wolf", 
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 7.5))
+errbar(seq(1,7,1), Wolf.param, Wolf.param+(1.96 * Wolf.ci), Wolf.param - (1.96 * Wolf.ci), add= T, cex = 2, lwd = 2)
+abline(h = 0, lwd = 2)
+
+plot(seq(1,7,1), Lynx.param, ylim = c(-2,3), ylab = "Parameter estimate", main = "Lynx",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 7.5))
+errbar(seq(1,7,1), Lynx.param, Lynx.param+(1.96 * Lynx.ci), 
+       Lynx.param - (1.96 * Lynx.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+
+par(mar = c(6,4,1,0.3))
+plot(seq(1,7,1), B.bear.param, ylim = c(-4,3), ylab = "Parameter estimate", main = "Brown bear",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 7.5))
+errbar(seq(1,7,1), B.bear.param, B.bear.param+(1.96 * B.bear.ci), 
+       B.bear.param - (1.96 * B.bear.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+axis(1, labels = c("Age", "Gender\n(male)", "Education", 
+                   "Small stock\nlost", "Large stock\nlost", "Small stock\nowned", "Large stock\nowned"), 
+     at = c(1,2,3,4,5,6,7), las = 2)
+
+par(mar = c(6,3,1,0.3))
+plot(seq(1,7,1), Ibex.param, ylim = c(-4,3), ylab = "", main = "Ibex",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 7.5))
+errbar(seq(1,7,1), Ibex.param, Ibex.param+(1.96 * Ibex.ci), 
+       Ibex.param - (1.96 * Ibex.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+axis(1, labels = c("Age", "Gender\n(male)", "Education", 
+                   "Small stock\nlost", "Large stock\nlost", "Small stock\nowned", "Large stock\nowned"), 
+     at = c(1,2,3,4,5,6,7), las = 2)
+
+plot(Argali.param, ylim = c(-4,3), ylab = "", main = "Argali",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 7.5))
+errbar(seq(1,7,1), Argali.param, Argali.param+(1.96 * Argali.ci), 
+       Argali.param - (1.96 * Argali.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+axis(1, labels = c("Age", "Gender\n(male)", "Education", 
+                   "Small stock\nlost", "Large stock\nlost", "Small stock\nowned", "Large stock\nowned"), 
+     at = c(1,2,3,4,5,6,7), las = 2)
+
+#### LMER analysis without livestock data thus includes all complete cases
+mod3.1 <- lmer(Total_Snow.leopard ~ Age + Gender + Education_ordered + (1|Country/Community), dat, REML = F)
+summary(mod3.1)
+Sl.param <- summary(mod3.1)$coefficients[2:4,1]
+Sl.ci <- summary(mod3.1)$coefficients[2:4,2]
+
+mod4.1 <- lmer(Total_Wolf ~ Age + Gender + Education_ordered + (1|Country/Community), dat, REML = F)
+summary(mod4.1)
+Wolf.param <- summary(mod4.1)$coefficients[2:4,1]
+Wolf.ci <- summary(mod4.1)$coefficients[2:4,2]
+
+mod5.1 <- lmer(Total_Lynx ~ Age + Gender + Education_ordered + (1|Community), dat, REML = F)
+summary(mod5.1)
+Lynx.param <- summary(mod5.1)$coefficients[2:4,1]
+Lynx.ci <- summary(mod5.1)$coefficients[2:4,2]
+
+mod6.1 <- lmer(Total_Brown.bear ~ Age + Gender + Education_ordered + (1|Community), dat, REML = F)
+summary(mod6.1)
+B.bear.param <- summary(mod6.1)$coefficients[2:4,1]
+B.bear.ci <- summary(mod6.1)$coefficients[2:4,2]
+
+mod7.1 <- lmer(Total_Ibex ~ Age + Gender + Education_ordered + (1|Country/Community), dat, REML = F)
+summary(mod7.1)
+Ibex.param <- summary(mod7.1)$coefficients[2:4,1]
+Ibex.ci <- summary(mod7.1)$coefficients[2:4,2]
+
+mod8.1 <- lmer(Total_Argali ~ Age + Gender + Education_ordered +  (1|Country/Community), dat, REML = F)
+summary(mod8.1)
+Argali.param <- summary(mod8.1)$coefficients[2:4,1]
+Argali.ci <- summary(mod8.1)$coefficients[2:4,2]
+
+## plotting the modelling results
+library(Hmisc)
+par(mfrow = c(2,3))
+par(mar = c(2,4,3,0.3))
+plot(Sl.param, ylim = c(-4,4), ylab = "Parameter estimate", main = "Snow leopard", 
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 3.5))
+errbar(seq(1,3,1), Sl.param, Sl.param+(1.96 * Sl.ci), Sl.param - (1.96 * Sl.ci), add= T, lwd = 2, cex =2)
+abline(h = 0, lwd =2)
+
+par(mar = c(2,3,3,0.3))
+plot(seq(1,3,1), Wolf.param, ylim = c(-4,4), ylab = "Parameter estimate", main = "Wolf", 
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 3.5))
+errbar(seq(1,3,1), Wolf.param, Wolf.param+(1.96 * Wolf.ci), Wolf.param - (1.96 * Wolf.ci), add= T, , cex = 2, lwd = 2)
+abline(h = 0, lwd = 2)
+
+plot(seq(1,3,1), Lynx.param, ylim = c(-4,4), ylab = "Parameter estimate", main = "Lynx",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 3.5))
+errbar(seq(1,3,1), Lynx.param, Lynx.param+(1.96 * Lynx.ci), 
+       Lynx.param - (1.96 * Lynx.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+
+par(mar = c(5,4,1,0.3))
+plot(seq(1,3,1), B.bear.param, ylim = c(-4,4), ylab = "Parameter estimate", main = "Brown bear",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 3.5))
+errbar(seq(1,3,1), B.bear.param, B.bear.param+(1.96 * B.bear.ci), 
+       B.bear.param - (1.96 * B.bear.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+axis(1, labels = c("Age", "Gender\n(male)", "Education"), at = c(1,2,3), las = 2)
+
+par(mar = c(5,3,1,0.3))
+plot(seq(1,3,1), Ibex.param, ylim = c(-4,4), ylab = "", main = "Ibex",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 3.5))
+errbar(seq(1,3,1), Ibex.param, Ibex.param+(1.96 * Ibex.ci), 
+       Ibex.param - (1.96 * Ibex.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+axis(1, labels = c("Age", "Gender\n(male)", "Education"), at = c(1,2,3), las = 2)
+
+plot(Argali.param, ylim = c(-4,4), ylab = "", main = "Argali",
+     xaxt = c("n"), xlab = "", xlim = c(0.5, 3.5))
+errbar(seq(1,3,1), Argali.param, Argali.param+(1.96 * Argali.ci), 
+       Argali.param - (1.96 * Argali.ci), add= T, lwd = 2, cex = 2)
+abline(h = 0, lwd = 2)
+axis(1, labels = c("Age", "Gender\n(male)", "Education"), at = c(1,2,3), las = 2, cex.lab = 2)
 ######## GLM analysis
-mod9 <- glm(Total_Snow.leopard ~ Gender + Country , data = dat)
+mod9 <- glm(Total_Snow.leopard ~ Age + Gender + Education_ordered + Country, data = dat)
 summary(mod9)
 
 mod10 <- glm(Total_Wolf ~  Gender + Country, data = dat)

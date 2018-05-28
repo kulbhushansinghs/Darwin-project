@@ -39,7 +39,7 @@ table(dat.ind$Number.of.Darwin.schemes)
 table(dat.ind$Number.of.other.schemes)
 table(dat.ind$number_scheme)
 table(dat.ind$accuracy.of.the.overall.interview)
-
+hist(dat.ind$Attitude)
 
 ### Some visualizations
 
@@ -48,13 +48,14 @@ boxplot(dat.ind$Attitude[which(dat.ind$Country == "China")],
         dat.ind$Attitude[which(dat.ind$Country == "Kyrgyzstan")],
         dat.ind$Attitude[which(dat.ind$Country == "Mongolia")],
         dat.ind$Attitude[which(dat.ind$Country == "Pakistan")], 
-        names = c("China", "India", "Kyrgyzstan","Mongolia", "Pakistan"))
+        names = c("China", "India", "Kyrgyzstan","Mongolia", "Pakistan"), 
+        ylab = "Attitude score")
 
 plot(dat.ind$Attitude~dat.ind$Age, ylab = "Attitude", xlab = "Age")
 
 boxplot(dat.ind$Attitude[which(dat.ind$Gender == "Male")],
         dat.ind$Attitude[which(dat.ind$Gender == "Female")],
-        names = c("Male", "Female"))
+        names = c("Male", "Female"), ylab = "Attitude score", col = "grey")
 
 boxplot(dat.ind$Attitude~dat.ind$X, ylab = "Attitude", xlab = "Education categories")
 
@@ -65,14 +66,17 @@ plot(dat.ind$Attitude~dat.ind$Large_loss)
 boxplot(dat.ind$Attitude~dat.ind$Number.of.Darwin.schemes, xlab = "Number of Darwin schemes")
 boxplot(dat.ind$Attitude~dat.ind$Number.of.all.schemes, xlab = "Number of all schemes")
 boxplot(dat.ind$Attitude~dat.ind$number_scheme, xlab = "Number of schemes" )
-boxplot(dat.ind$Attitude~dat.ind$SLE, ylab = "Attitude", xlab = "SLE")
-boxplot(dat.ind$Attitude~dat.ind$Vaccination, ylab = "Attitude", xlab = "Vaccination")
-boxplot(dat.ind$Attitude~dat.ind$Insurance , ylab = "Attitude", xlab = "Insurance")
-boxplot(dat.ind$Attitude~dat.ind$Corral, ylab = "Attitude", xlab = "Corral")
+
+par(mfrow = c(2,2))
+par(mar = c(4,3,1,1))
+boxplot(dat.ind$Attitude~dat.ind$SLE, ylab = "Attitude", xlab = "SLE", col = "grey")
+boxplot(dat.ind$Attitude~dat.ind$Vaccination, ylab = "Attitude", xlab = "Vaccination", col = "grey")
+boxplot(dat.ind$Attitude~dat.ind$Insurance , ylab = "Attitude", xlab = "Insurance", col = "grey")
+boxplot(dat.ind$Attitude~dat.ind$Corral, ylab = "Attitude", xlab = "Corral", col = "grey")
 
 
 ############ Mixed effects models analysis
  mod1 <- lmer(Attitude ~ Age_numeric + X + Gender +
                 Profession + Small_have + Small_loss + Large_have +
-                Large_loss + (1|Country/Community), data = dat.ind)
+                Large_loss + Number.of.Darwin.schemes + (1|Country/Community), data = dat.ind)
 summary(mod1) 

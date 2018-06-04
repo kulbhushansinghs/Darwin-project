@@ -5,7 +5,7 @@ library(lme4)
 setwd("/Users/Kullu/Dropbox (Snow Leopard Trust)/Kullu_desktop/Git/Darwin-project/Data")
 
 #### Importing individual level data
-dat.ind <- read.csv("Individual level data.csv", header = T)
+dat.ind <- read.csv("Year 3 Individual level data.csv", header = T)
 
 #### Cleaning Individual level data
 summary(dat.ind)
@@ -15,9 +15,9 @@ table(dat.ind$Age) # multiple symbols used so it will need to be cleaned up manu
 table(dat.ind$Age_numeric)
 hist(dat.ind$Age_numeric)
 table(dat.ind$Gender)
-table(dat.ind$education) # Needs manual cleaning up
-table(dat.ind$X)
-hist(dat.ind$X)
+table(dat.ind$Education) # Needs manual cleaning up
+table(dat.ind$Education_scored)
+hist(dat.ind$Education_scored)
 table(dat.ind$Profession)
 table(dat.ind$Small_have)
 hist(dat.ind$Small_have) 
@@ -73,6 +73,22 @@ boxplot(dat.ind$Attitude~dat.ind$SLE, ylab = "Attitude", xlab = "SLE", col = "gr
 boxplot(dat.ind$Attitude~dat.ind$Vaccination, ylab = "Attitude", xlab = "Vaccination", col = "grey")
 boxplot(dat.ind$Attitude~dat.ind$Insurance , ylab = "Attitude", xlab = "Insurance", col = "grey")
 boxplot(dat.ind$Attitude~dat.ind$Corral, ylab = "Attitude", xlab = "Corral", col = "grey")
+
+par(mfrow = c(2,2))
+par(mar = c(4,5,1,1))
+boxplot(dat.ind$Small_loss~dat.ind$SLE, ylab = "Number of smallstock lost", xlab = "SLE", col = "grey")
+boxplot(dat.ind$Small_loss~dat.ind$Vaccination, ylab = "Number of smallstock lost", xlab = "Vaccination", col = "grey")
+boxplot(dat.ind$Small_loss~dat.ind$Insurance , ylab = "Number of smallstock lost", xlab = "Insurance", col = "grey")
+boxplot(dat.ind$Small_loss~dat.ind$Corral, ylab = "Number of smallstock lost", xlab = "Corral", col = "grey")
+
+boxplot(dat.ind$Large_loss~dat.ind$SLE, ylab = "Number of largestock lost", xlab = "SLE", col = "grey")
+boxplot(dat.ind$Large_loss~dat.ind$Vaccination, ylab = "Number of largestock lost", xlab = "Vaccination", col = "grey")
+boxplot(dat.ind$Large_loss~dat.ind$Insurance , ylab = "Number of largestock lost", xlab = "Insurance", col = "grey")
+boxplot(dat.ind$Large_loss~dat.ind$Corral, ylab = "Number of largestock lost", xlab = "Corral", col = "grey")
+
+summary(lmer(Small_loss~ SLE + Vaccination + Insurance + Corral + (1|Country/Community), data = dat.ind))
+
+summary(lmer(Large_loss~SLE + Vaccination + Insurance + Corral + (1|Country/Community), data = dat.ind))
 
 
 ############ Mixed effects models analysis

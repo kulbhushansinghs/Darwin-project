@@ -102,7 +102,8 @@ hist(dat$Total_Brown.bear)
 
 dat<-subset(dat, select = c(Country, Community, Age, Gender, Education_ordered, Small_loss, 
                             Large_loss, Small_have, Large_have, Total_Snow.leopard, Total_Wolf, 
-                            Total_Lynx, Total_Ibex, Total_Brown.bear, Total_Argali))
+                            Total_Lynx, Total_Ibex, Total_Brown.bear, Total_Argali, Total_Markhor, Total_Blue.sheep,
+                            Number.of.schemes))
 dat<-dat[complete.cases(dat[,3:5]),]
 ##################################################################
 ########## Analysis of the attitude data by country
@@ -563,3 +564,75 @@ summary(mod9)
 
 mod10 <- glm(Total_Wolf ~  Gender + Country, data = dat)
 summary(mod10)
+
+par(mfrow = c(2,2))
+names(dat)
+par(mar = c(3,4,2,1))
+boxplot(dat$Total_Snow.leopard[which(dat$Number.of.schemes == 0)],
+        dat$Total_Snow.leopard[which(dat$Number.of.schemes == 1)],
+        dat$Total_Snow.leopard[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Snow leopard")
+boxplot(dat$Total_Wolf [which(dat$Number.of.schemes == 0)],
+        dat$Total_Wolf[which(dat$Number.of.schemes == 1)],
+        dat$Total_Wolf[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Wolf")
+par(mar = c(4,4,2,1))
+boxplot(dat$Total_Lynx[which(dat$Number.of.schemes == 0)],
+        dat$Total_Lynx[which(dat$Number.of.schemes == 1)],
+        dat$Total_Lynx[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Lynx", xlab = "Number of schemes")
+boxplot(dat$Total_Brown.bear[which(dat$Number.of.schemes == 0)],
+        dat$Total_Brown.bear[which(dat$Number.of.schemes == 1)],
+        dat$Total_Brown.bear[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Brown bear", xlab = "Number of schemes")
+
+par(mar = c(3,4,2,1))
+boxplot(dat$Total_Ibex[which(dat$Number.of.schemes == 0)],
+        dat$Total_Ibex[which(dat$Number.of.schemes == 1)],
+        dat$Total_Ibex[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Ibex")
+boxplot(dat$Total_Argali[which(dat$Number.of.schemes == 0)],
+        dat$Total_Argali[which(dat$Number.of.schemes == 1)],
+        dat$Total_Argali[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Argali")
+par(mar = c(4,4,2,1))
+boxplot(dat$Total_ [which(dat$Number.of.schemes == 0)],
+        dat$Total_Argali[which(dat$Number.of.schemes == 1)],
+        dat$Total_Argali[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Markhor", xlab = "Number of schemes")
+boxplot(dat$Total_Argali[which(dat$Number.of.schemes == 0)],
+        dat$Total_Argali[which(dat$Number.of.schemes == 1)],
+        dat$Total_Argali[which(dat$Number.of.schemes >= 2)], 
+        names = c("0", "1", "2"), ylab = "Attitude", main = "Blue sheep", xlab = "Number of schemes")
+
+mod.sl <- lmer(Total_Snow.leopard ~ Age + Gender + Education_ordered + Number.of.schemes +
+                (1|Country/Community), data = dat)
+summary(mod.sl)
+
+mod.wolf <- lmer(Total_Wolf ~ Age + Gender + Education_ordered + Number.of.schemes +
+                 (1|Country/Community), data = dat)
+summary(mod.wolf)
+
+mod.lynx <- lmer(Total_Lynx ~ Age + Gender + Education_ordered + Number.of.schemes +
+                               (1|Country/Community), data = dat)
+summary(mod.lynx)
+
+mod.bb <- lmer(Total_Brown.bear ~ Age + Gender + Education_ordered + Number.of.schemes +
+                 (1|Community), data = dat)
+summary(mod.bb)
+
+mod.ibex <- lmer(Total_Ibex ~ Age + Gender + Education_ordered + Number.of.schemes +
+                 (1|Country/Community), data = dat)
+summary(mod.ibex)
+
+mod.argali <- lmer(Total_Argali ~ Age + Gender + Education_ordered + Number.of.schemes +
+                 (1|Country/Community), data = dat)
+summary(mod.argali)
+
+mod.markhor <- lmer(Total_Markhor ~ Age + Gender + Education_ordered + Number.of.schemes +
+                 (1|Country/Community), data = dat)
+summary(mod.markhor)
+
+mod.bs <- lmer(Total_Blue.sheep ~ Age + Gender + Education_ordered + Number.of.schemes +
+                 (1|Country/Community), data = dat)
+summary(mod.bs)

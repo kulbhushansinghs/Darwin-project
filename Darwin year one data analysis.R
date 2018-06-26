@@ -62,7 +62,7 @@ hist(dat$No.female.family.members)
 table(dat$No.male.family.members)
 
 table(dat$Info_SL.conservation) #Useful infomation
-table(dat$Type)
+™table(dat$Type)
 table(dat$Often)  # This variable will need to be scaled to a same unit before analysis
 table(dat$Others_info_SL.conservation)
 table(dat$Info_SL.conservation, dat$Others_info_SL.conservation)
@@ -617,7 +617,7 @@ mod.wolf <- lmer(Total_Wolf ~ Age + Gender + Education_ordered + Number.of.schem
 summary(mod.wolf)
 
 mod.lynx <- lmer(Total_Lynx ~ Age + Gender + Education_ordered + Number.of.schemes +
-                               (1|Country/Community), data = dat)
+                               (1|Community), data = dat)
 summary(mod.lynx)
 
 mod.bb <- lmer(Total_Brown.bear ~ Age + Gender + Education_ordered + Number.of.schemes +
@@ -639,3 +639,38 @@ summary(mod.markhor)
 mod.bs <- lmer(Total_Blue.sheep ~ Age + Gender + Education_ordered + Number.of.schemes +
                  (1|Country/Community), data = dat)
 summary(mod.bs)
+
+####################################
+### Analysis with the number of schmes
+
+par(mfrow = c(2,3))
+par(mar = c(2,4,3,0.3))
+boxplot(dat$Total_Snow.leopard[which(dat$Number.of.schemes == 0)],
+        dat$Total_Snow.leopard[which(dat$Number.of.schemes == 1)],
+        dat$Total_Snow.leopard[which(dat$Number.of.schemes >= 2)], 
+        names= c("0", "1", ">2"), ylab = "Attitude score", main = "Snow leopard")
+boxplot(dat$Total_Wolf[which(dat$Number.of.schemes == 0)],
+        dat$Total_Wolf[which(dat$Number.of.schemes == 1)],
+        dat$Total_Wolf[which(dat$Number.of.schemes >= 2)], 
+        names= c("0", "1", ">2"), ylab = "Attitude score", main = "Wolf")
+boxplot(dat$Total_Lynx[which(dat$Number.of.schemes == 0)],
+        dat$Total_Lynx[which(dat$Number.of.schemes == 1)],
+        dat$Total_Lynx[which(dat$Number.of.schemes >= 2)], 
+        names= c("0", "1", ">2"), ylab = "Attitude score", main = "Lynx")
+par(mar = c(4,4,3,0.3))
+boxplot(dat$Total_Brown.bear[which(dat$Number.of.schemes == 0)],
+        dat$Total_Brown.bear[which(dat$Number.of.schemes == 1)],
+        dat$Total_Brown.bear[which(dat$Number.of.schemes >= 2)], 
+        names= c("0", "1", ">2"), ylab = "Attitude score", main = "Brown bear",
+        xlab = "Number of Schemes")
+boxplot(dat$Total_Ibex[which(dat$Number.of.schemes == 0)],
+        dat$Total_Ibex[which(dat$Number.of.schemes == 1)],
+        dat$Total_Ibex[which(dat$Number.of.schemes >= 2)], 
+        names= c("0", "1", ">2"), ylab = "Attitude score", main = "Ibex",
+        xlab = "Number of Schemes")
+boxplot(dat$Total_Argali[which(dat$Number.of.schemes == 0)],
+        dat$Total_Argali[which(dat$Number.of.schemes == 1)],
+        dat$Total_Argali[which(dat$Number.of.schemes >= 2)], 
+        names= c("0", "1", ">2"), ylab = "Attitude score", main = "Argali",
+        xlab = "Number of Schemes")
+

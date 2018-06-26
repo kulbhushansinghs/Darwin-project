@@ -20,8 +20,11 @@ dat$Community[which(dat$Community == "")]<- NA
 
 table(dat$Age)
 hist(dat$Age)
-
-table(dat$Gender)
+table(dat$Country)
+unique(dat$Community[which(dat$Country == "Pakistan")])
+unique(dat$Community[which(dat$Country == "Mongolia")])
+unique(dat$Community[which(dat$Country == "Kyrgyzstan")])
+table(dat$Gender, dat$Country)
 dat$Gender[which(dat$Gender == "Fimale")] <- "Female"
 dat$Gender[which(dat$Gender == "male")] <- "Male"
 
@@ -154,7 +157,7 @@ boxplot(dat$Total_Markhor[which(dat$Country == "Mongolia")],
         names= c("Mongolia", "Kyrgyzstan", "Pakistan"), main = "Markhor", ylim = c(0,40))
 
 hist(dat$Total_Snow.leopard[which(dat$Country == "Kyrgyzstan")], main = "Snow leopard")
-
+summary(lm(dat$Total_Snow.leopard~dat$Country))
 #####################################################################
 ##### Analysis by Sl conservation information
 

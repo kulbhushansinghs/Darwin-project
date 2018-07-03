@@ -1,7 +1,7 @@
-setwd("/Users/Kullu/Desktop")
+setwd("/Users/Kullu/Dropbox (Snow Leopard Trust)/Kullu_desktop/Git/Darwin-project")
 dat<-read.csv("Annex 4.csv", header=T)
 library(tidyverse)
-#library(dplyr)
+library(dplyr)
 dat
 prey.data<-gather(subset(dat,select= c(Country, Landscape, 
                                        Control.Conservation, 
